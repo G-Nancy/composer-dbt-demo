@@ -1,0 +1,27 @@
+# requirements.txt for dbt and Kubernetes/Airflow dependencies
+
+# dbt Core (adjust version as needed)
+dbt-core~=1.6.0  # Or your specific dbt version
+
+# BigQuery adapter (or your appropriate adapter)
+dbt-bigquery~=1.6.0  # Match with dbt-core version
+
+# Airflow providers (if needed within the container)
+apache-airflow-providers-cncf-kubernetes~=6.0.0  # Or later
+
+# Other Python libraries
+pandas
+numpy
+requests
+google-cloud-bigquery  # For interacting with BigQuery from within the container
+PyYAML # For parsing YAML files (if needed for dbt or other config)
+
+# Any other packages your dbt code or Airflow tasks require
+#... for example
+datetime  # These are already in the base Python image, so not strictly needed
+json      # These are already in the base Python image, so not strictly needed
+os        # These are already in the base Python image, so not strictly needed
+
+# If you have specific versions for pandas, numpy, etc., specify them:
+# pandas==1.5.3
+# numpy>=1.20.0

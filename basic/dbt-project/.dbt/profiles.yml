@@ -1,0 +1,26 @@
+dbt_composer_on_gcp: # Your dbt project name
+  dev:
+    target: dev
+    outputs:
+      dev:
+        type: bigquery
+        method: oauth
+        project: "{{ var('project_id') }}"
+        schema: dev
+        threads: 2
+        timeout_seconds: 10
+        location: "{{ var('bigquery_location') }}"
+        priority: batch
+        retries: 0
+
+      cloud-build:
+        type: bigquery
+        method: oauth
+        project: "{{ var('project_id') }}"
+        schema: dev
+        threads: 2
+        timeout_seconds: 10
+        location: "{{ var('bigquery_location') }}"
+        priority: batch
+        retries: 0
+        impersonate_service_account: "{{ var('impersonate_service_account') }}"

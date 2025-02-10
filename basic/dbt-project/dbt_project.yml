@@ -1,0 +1,23 @@
+name: dbt_composer_on_gcp
+profile:  dbt_composer_on_gcp
+version: '1.0.0'
+config-version: 1
+
+source-paths: ["models"]
+
+target-path: "target"
+clean-targets:
+    - "target"
+    - "dbt_modules"
+
+models:
+    dbt_composer_on_gcp:
+        raw:
+            schema: de_raw
+        intermediate:
+            schema: de_intermediate
+        datamart:
+            schema: de_datamart
+    +persist_docs:
+        relation: true 
+        columns: true

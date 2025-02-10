@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: bigquery_public_data
+    database: "{{ var('source_data_project') }}"
+    schema: stackoverflow
+    tables:
+      - name: stackoverflow_posts
+      - name: users

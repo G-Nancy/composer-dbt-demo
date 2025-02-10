@@ -1,0 +1,21 @@
+# Schema is not mandatory in dbt. But there are a lot of dbt features use schema. e.g tests, description
+# Check the documentation for all available tests on dbt: 
+# https://docs.getdbt.com/docs/building-a-dbt-project/tests
+
+version: 2
+
+models:
+    - name: stackoverflow_posts
+      description: "stackoverflow_posts raw table"
+      columns:
+          - name: last_activity_date
+            description: "Last activity date from the post"
+            tests:
+                - not_null
+    - name: users
+      description: "users raw table"
+      columns:
+          - name: id
+            description: "User id"
+            tests:
+                - not_null
