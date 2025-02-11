@@ -1,9 +1,9 @@
 name: dbt_composer_on_gcp
-profile:  dbt_composer_on_gcp
+profile: dbt_composer_on_gcp
 version: '1.0.0'
-config-version: 1
+config-version: 2
 
-source-paths: ["models"]
+model-paths: ["models"]
 
 target-path: "target"
 clean-targets:

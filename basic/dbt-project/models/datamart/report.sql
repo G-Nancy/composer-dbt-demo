@@ -11,7 +11,7 @@ SELECT
     views,
     SUM(total_post) as total_post
 FROM 
-    {{ ref('fact_posts_daily') }} fact_posts_daily 
+    {{ ref('fact_posts') }} fact_posts_daily 
 JOIN 
     {{ ref('dim_users') }} dim_users ON fact_posts_daily.owner_user_id = dim_users.id
 GROUP BY 

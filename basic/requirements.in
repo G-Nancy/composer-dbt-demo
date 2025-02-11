@@ -1,0 +1,12 @@
+# requirements.txt for dbt and Kubernetes/Airflow dependencies
+# Rebuild requirements.txt through the following:
+# pip-compile --generate-hashes --resolver=backtracking requirements.in > requirements.txt
+
+# dbt Core (adjust version as needed)
+dbt-core~=1.9.2  # Or your specific dbt version
+
+# BigQuery adapter (or your appropriate adapter)
+dbt-bigquery~=1.9.1  # Match with dbt-core version
+
+# Airflow providers (if needed within the container)
+apache-airflow-providers-cncf-kubernetes~=6.0.0  # Or later

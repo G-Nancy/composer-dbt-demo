@@ -1,5 +1,4 @@
-version: 2
-
+version: 1
 sources:
   - name: bigquery_public_data
     database: "{{ var('source_data_project') }}"

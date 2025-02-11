@@ -1,4 +1,4 @@
-FROM python:3.8.5
+FROM python:3.9.2
 
 # Install required system packages and cleanup to reduce image size
 RUN apt-get update -y && \
