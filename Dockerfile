@@ -17,7 +17,8 @@ WORKDIR $DBT_DIR
 
 # Copy files to the image
 COPY requirements.txt /tmp/
-RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm /tmp/requirements.txt
+RUN pip install --require-hashes --no-cache-dir -r /tmp/requirements.txt && rm /tmp/requirements.txt
+#RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm /tmp/requirements.txt
 COPY . $DBT_DIR
 
 # Run dbt

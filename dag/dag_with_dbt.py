@@ -12,7 +12,8 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.models import Variable
 
 from airflow.kubernetes.secret import Secret
-from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
+# from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 
 # The environment variables from Cloud Composer
 env = Variable.get("run_environment")
@@ -122,7 +123,7 @@ with models.DAG(
             name=pod_id,
             image_pull_policy='Always',
             arguments=[cmd] + dbt_full_args,
-            namespace='default',
+            namespace='composer-user-workloads',
             get_logs=True,  # Capture logs from the pod
             log_events_on_failure=True,  # Capture and log events in case of pod failure
             is_delete_operator_pod=True, # To clean up the pod after runs

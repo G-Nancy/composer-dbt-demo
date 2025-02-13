@@ -9,4 +9,4 @@ dbt-core~=1.9.2  # Or your specific dbt version
 dbt-bigquery~=1.9.1  # Match with dbt-core version
 
 # Airflow providers (if needed within the container)
-apache-airflow-providers-cncf-kubernetes~=6.0.0  # Or later
+#apache-airflow-providers-cncf-kubernetes~=6.0.0  # Or later

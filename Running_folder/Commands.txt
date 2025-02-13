@@ -25,3 +25,12 @@ git clone https://github.com/GoogleCloudBuild/cloud-console-sample-build && \
 git clone https://github.com/G-Nancy/composer-dbt-demo.git && \
   cd composer-dbt-demo && cd basic && cd dbt_project \
   gcloud builds submit --config cloudbuild.yaml --region=global
+
+
+
+airflow_uri = "https://df0d66f76d4f46e7925fdd78dd5c0aec-dot-europe-west1.composer.googleusercontent.com"
+docs_gcs_bucket = "td2bq-demo-docs"
+lookerstudio_create_dashboard_url = "https://lookerstudio.google.com/reporting/create?c.reportId=1e0b060b-064a-4266-b115-e224da42689f&c.reportName=MyNewReport&ds.dbt_jobs.projectId=td2bq-demo&ds.dbt_jobs.billingProjectId=td2bq-demo&ds.dbt_jobs.type=TABLE&ds.dbt_jobs.datasetId=monitoring&ds.dbt_jobs.tableId=dbt_jobs"
+export PROJECT_ID= "td2bq-demo"
+export REGISTRY_URL = "europe-west1-docker.pkg.dev/td2bq-demo/dbt-composer-repository"
+export AIRFLOW_DAG_GCS_PREFIX = "gs://europe-west1-composer-dbt-38e77eb9-bucket/dags"
