@@ -35,7 +35,7 @@ default_args = {
 }
 
 # Select and use the correct Docker image from the private Google Cloud Repository (GCR)
-IMAGE = 'gcr.io/{project}/dbt-builder:latest'.format(
+IMAGE = 'gcr.io/{project}/dbt-builder-basic:latest'.format(
     project=project
 )
 
@@ -45,15 +45,15 @@ IMAGE = 'gcr.io/{project}/dbt-builder:latest'.format(
 # more control over how it is used, and reduces the risk of accidental
 # exposure.
 
-secret_volume = Secret(
-    deploy_type='volume',
-    # Path where we mount the secret as volume
-    deploy_target='/var/secrets/google',
-    # Name of Kubernetes Secret
-    secret='dbt-sa-secret',
-    # Key in the form of service account file name
-    key='key.json'
-)
+# secret_volume = Secret(
+#     deploy_type='volume',
+#     # Path where we mount the secret as volume
+#     deploy_target='/var/secrets/google',
+#     # Name of Kubernetes Secret
+#     secret='dbt-sa-secret',
+#     # Key in the form of service account file name
+#     key='key.json'
+# )
 
 # dbt default variables
 # These variables will be passed into the dbt run
@@ -109,7 +109,7 @@ def get_dbt_full_args(dbt_args=None):
 
 # Define the DAG
 with models.DAG(
-    dag_id='run_dbt_on_kubernetes_optimized',
+    dag_id='run_dbt_on_kubernetes_v2',
     schedule_interval= "0 0 * * *",
     default_args=default_args,
 ) as dag:
@@ -122,28 +122,27 @@ with models.DAG(
 
         # The pod id should be unique for each execution date
         pod_id = 'dbt_cli_{}_{}'.format(cmd, execution_date)
-        GKEStartPodOperator(
-            task_id=pod_id,
-            name=pod_id,
-            image_pull_policy='Always',
-            arguments=[cmd] + dbt_full_args,
-            get_logs=True,  # Capture logs from the pod
-            log_events_on_failure=True,  # Capture and log events in case of pod failure
-            on_finish_action="delete_pod",
-            image=IMAGE,
-        ).execute(context)
-        # KubernetesPodOperator(
+        # GKEStartPodOperator(
         #     task_id=pod_id,
         #     name=pod_id,
         #     image_pull_policy='Always',
         #     arguments=[cmd] + dbt_full_args,
-        #     namespace='composer-user-workloads',
         #     get_logs=True,  # Capture logs from the pod
         #     log_events_on_failure=True,  # Capture and log events in case of pod failure
-        #     is_delete_operator_pod=True, # To clean up the pod after runs
+        #     on_finish_action="delete_pod",
         #     image=IMAGE,
-        #     secrets=[secret_volume]  # Set Kubernetes secret reference to dbt's service account JSON
         # ).execute(context)
+        KubernetesPodOperator(
+            task_id=pod_id,
+            name=pod_id,
+            image_pull_policy='Always',
+            arguments=[cmd] + dbt_full_args,
+            namespace='composer-user-workloads',
+            get_logs=True,  # Capture logs from the pod
+            log_events_on_failure=True,  # Capture and log events in case of pod failure
+            is_delete_operator_pod=True, # To clean up the pod after runs
+            image=IMAGE
+        ).execute(context)
 
     # Raw Model
     # Running the dbt run command
