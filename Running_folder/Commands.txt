@@ -6,7 +6,7 @@ AIRFLOW_VAR_SOURCE_DATA_PROJECT
 pyenv versions  # List available pyenv versions
 pyenv global 3.7-dev  # Or pyenv local 3.7-dev in your project directory
 python --version  # Should show Python 3.7.x
-
+python -m pip install pip-tools
 
 #Check the profile key in your dbt_project.yml
 #Check the profiles you have in your profiles.yml
@@ -26,6 +26,7 @@ git clone https://github.com/G-Nancy/composer-dbt-demo.git && \
   cd composer-dbt-demo && cd basic && cd dbt_project \
   gcloud builds submit --config cloudbuild.yaml --region=global
 
+gcloud builds submit --project td2bq-demo --substitutions "_DBT_SERVICE_ACCOUNT=projects/td2bq-demo/serviceAccounts/sa-terraform@td2bq-demo.iam.gserviceaccount.com,_GCS_BUCKET=td2bq-demo_cloudbuild" .
 
 
 airflow_uri = "https://df0d66f76d4f46e7925fdd78dd5c0aec-dot-europe-west1.composer.googleusercontent.com"
