@@ -63,7 +63,7 @@ default_dbt_vars = {
         "project_id": project,
         # Example on using Cloud Composer's variable to be passed to dbt
         "bigquery_location": Variable.get("bigquery_location"),
-        "key_file_dir": '/var/secrets/google/key.json',
+        # "key_file_dir": '/var/secrets/google/key.json',
         "source_data_project": Variable.get("source_data_project")
     }
 

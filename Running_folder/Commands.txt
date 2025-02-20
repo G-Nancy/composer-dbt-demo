@@ -28,6 +28,7 @@ git clone https://github.com/G-Nancy/composer-dbt-demo.git && \
 
 gcloud builds submit --project td2bq-demo --substitutions "_DBT_SERVICE_ACCOUNT=projects/td2bq-demo/serviceAccounts/sa-terraform@td2bq-demo.iam.gserviceaccount.com,_GCS_BUCKET=td2bq-demo_cloudbuild" .
 
+dbt run --vars '{"project_id": td2bq-demo, "bigquery_location": "us", "execution_date": "1970-01-01","source_data_project": "bigquery-public-data"}' --profiles-dir .dbt
 
 airflow_uri = "https://df0d66f76d4f46e7925fdd78dd5c0aec-dot-europe-west1.composer.googleusercontent.com"
 docs_gcs_bucket = "td2bq-demo-docs"
